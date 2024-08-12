@@ -10,14 +10,14 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func ReadHeaderParam(w http.ResponseWriter, r *http.Request, param_name string, required bool) string {
-	param_str := r.URL.Query().Get(param_name)
-	if required && param_str == "" {
-		msg := "Missing required request param" + param_name
+func ReadHeaderParam(w http.ResponseWriter, r *http.Request, paramName string, required bool) string {
+	paramStr := r.URL.Query().Get(paramName)
+	if required && paramStr == "" {
+		msg := "Missing required request param" + paramName
 		http.Error(w, msg, http.StatusBadRequest)
 		return ""
 	}
-	return param_str
+	return paramStr
 }
 
 type NotFoundError struct {
@@ -40,19 +40,19 @@ func Valid(email string) bool {
 	return err == nil
 }
 
-func LoadEnvVar(var_name string) (string, error) {
-	var_, exists := os.LookupEnv(var_name)
+func LoadEnvVar(varName string) (string, error) {
+	var_, exists := os.LookupEnv(varName)
 
 	if !exists {
 		InitEnv()
-		inf_msg := fmt.Sprintf("Env variable %s is not set, calling InitEnv", var_name)
-		log.Println(inf_msg)
-		var_, exists = os.LookupEnv(var_name)
+		infMsg := fmt.Sprintf("Env variable %s is not set, calling InitEnv", varName)
+		log.Println(infMsg)
+		var_, exists = os.LookupEnv(varName)
 	}
 
-	err_msg := fmt.Sprintf("Env variable %s is not set", var_name)
+	errMsg := fmt.Sprintf("Env variable %s is not set", varName)
 	if !exists {
-		return "", &NotFoundError{Message: err_msg}
+		return "", &NotFoundError{Message: errMsg}
 	}
 	return var_, nil
 }

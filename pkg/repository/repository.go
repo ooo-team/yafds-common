@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strconv"
 
+	_ "github.com/lib/pq"
+
 	common "github.com/ooo-team/yafds-common/pkg"
 )
 
@@ -15,12 +17,12 @@ func GetDB() *sql.DB {
 		panic(err.Error())
 	}
 
-	port_str, err := common.LoadEnvVar("dbPort")
+	portStr, err := common.LoadEnvVar("dbPort")
 	if err != nil {
 		panic(err.Error())
 	}
 
-	port, err := strconv.Atoi(port_str)
+	port, err := strconv.Atoi(portStr)
 	if err != nil {
 		panic("cannot convert string dbPort to int")
 	}
