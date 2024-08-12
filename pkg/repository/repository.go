@@ -6,7 +6,6 @@ import (
 	"strconv"
 
 	_ "github.com/lib/pq"
-
 	common "github.com/ooo-team/yafds-common/pkg"
 )
 
