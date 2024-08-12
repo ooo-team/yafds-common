@@ -40,7 +40,7 @@ func Valid(email string) bool {
 	return err == nil
 }
 
-func LoadEnvVar(var_name string) string {
+func LoadEnvVar(var_name string) (string, error) {
 	var_, exists := os.LookupEnv(var_name)
 
 	if !exists {
@@ -52,7 +52,7 @@ func LoadEnvVar(var_name string) string {
 
 	err_msg := fmt.Sprintf("Env variable %s is not set", var_name)
 	if !exists {
-		panic(err_msg)
+		return "", &NotFoundError{Message: err_msg}
 	}
-	return var_
+	return var_, nil
 }
