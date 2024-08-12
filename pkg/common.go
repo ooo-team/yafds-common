@@ -40,6 +40,8 @@ func Valid(email string) bool {
 	return err == nil
 }
 
+// change code
+
 func LoadEnvVar(varName string) (string, error) {
 	var_, exists := os.LookupEnv(varName)
 
